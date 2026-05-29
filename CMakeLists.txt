@@ -50,7 +50,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_OSX_DEPLOYMENT_TARGET 14.0)
+if(NOT APPLE)
+  message(FATAL_ERROR "JS8Call-improved supports macOS only")
+endif()
+set(CMAKE_OSX_DEPLOYMENT_TARGET "26.0" CACHE STRING "" FORCE)
 
 #------------------------------------------------------------------------------#
 # Project configuration. The software build version is set here. If the version
@@ -63,8 +66,8 @@ project(
   LANGUAGES C CXX
 )
 
-set(PROJECT_VENDOR "Jordan Sherer, KN4CRD")
-set(PROJECT_CONTACT "Jordan Sherer <kn4crd@gmail.com>")
+set(PROJECT_VENDOR "Heiko Amft, DL1BZ")
+set(PROJECT_CONTACT "Heiko Amft <dl1bz@bzsax.de>")
 set(PROJECT_COPYRIGHT "Copyright (C) 2001-2018 by Joe Taylor, K1JT, (C) 2018 by Jordan Sherer, KN4CRD, (C) of contributed work is owned by individual contributors")
 set(PROJECT_HOMEPAGE https://groups.io/g/js8call)
 set(PROJECT_SUMMARY_DESCRIPTION "${PROJECT_NAME} - Digital Modes for Weak Signal Communications in Amateur Radio.")

@@ -156,9 +156,9 @@ void UI_Constructor::ensureMessageDock()
 }
 
 void UI_Constructor::checkStartupWarnings() {
-    if (m_config.check_for_updates()) {
-        checkVersion(false);
-    }
+    // if (m_config.check_for_updates()) {
+    //     checkVersion(false);
+    // }
     ensureCallsignSet(false);
 }
 
