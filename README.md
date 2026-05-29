@@ -1,3 +1,14 @@
+## IMPORTANT NOTICE ABOUT THIS JS8Call-improved FORK
+This repo is a fork of JS8Call-improved you can find here [https://github.com/JS8Call-improved/JS8Call-improved](https://github.com/JS8Call-improved/JS8Call-improved)
+
+I forked this project here, because I not agree with the contribution and code design rules of the original project. So I'm free here to make my own code changes how I want and how I need. I'm full respect the whole work of all developers around the original project.
+
+NO SUPPORT AT ALL HERE ! Please no issue report, feature requests, pull requests - all will be ignored. This here is only my working copy for development, but I'm ready to share my work. That's it - but nothing beyond that.
+
+**All my work here is limited and made only for macOS, not for WINDOWS, not for LINUX !**
+
+Heiko, DL1BZ
+
 # JS8Call-improved
 JS8Call-improved is continued development of the original JS8Call project. Most of the same developers have worked on both projects.
 
@@ -7,21 +18,13 @@ Like JS8Call, JS8Call-improved is licensed under the GPLv3, the Qt libraries use
 
 You can view or save an offline copy of the JS8Call User Guide [here](https://js8call-improved.github.io/JS8Call-improved/d6/d14/md_docs_2user__guide_2JS8Call__User__Guide.html)
 
-# Building JS8Call-improved From Sourcecode
-Instructions can be found in [docs](docs) in the source tree for building JS8Call on MacOS, Linux and Windows, as well as a contributor's guide.
+# Building JS8Call-improved From Sourcecode - macOS port only
+1. you need a ready-compiled hamlib, that's not part of the build process JS8Call-improved
+2. install Homebrew/Brew environment with all needed requirements
+3. use the included build script COMPILE_MACOS_BREW.sh for build JS8Call-improved under macOS (adjust HAMLIB path first in the script)
+4. This here is nothing for beginners. You need to have the knowledge for build an macOS app with homebrew. There is and will be no help from me.
 
-# Debugging JS8Call-improved
-You can get a lot of debug output reporting what the program does by setting the environment variable `QT_LOGGING_RULES` to an appropriate value.
-
-The value `*.js8=true` gives you all output there is.
-
-Each line starts with a "logging category". These can be used to filter, so fewer lines you are not interested in will be given.
-
-For example, if you are interested in lines starting with `mainwindow.js8` and `configuration.js8` only, to debug a certain problem, set `QT_LOGGING_RULES` to `mainwindow.js8=true;configuration.js8=true` to just see what those two have to say.
-
-You find `decoder.js8` a bit too noisy, you may use the value `*.js8=true;decoder.js8=false` to silence it, but still see all the others.
-
-The official documentation of what we are using here can be found at [https://doc.qt.io/qt-6/qloggingcategory.html#checking-category-configuration](https://doc.qt.io/qt-6/qloggingcategory.html#checking-category-configuration).
+Heiko, DL1BZ
 
 # History - JS8Call
 JS8Call is an experiment in combining the robustness of FT8 (a weak-signal mode by K1JT) with a messaging and network protocol layer for weak signal communication. The open source software is designed for connecting amateur radio operators who are operating under weak signal conditions and offers real-time keyboard-to-keyboard messaging, store-and-forward messaging, and automatic station announcements.
@@ -59,18 +62,6 @@ JS8Call is a derivative of the WSJT-X application, restructured and redesigned f
 * June 6, 2019 - Version 1.1.0 general availability
 * November 29, 2019 - Version 2.0.0 general availability - Fast and Turbo speeds introduced!
 * December 22, 2019 - Version 2.1.0 general availability - Slow speed introduced!
-
-# JS8Call Updates to v2.3.x
-This is, in the flavor of `WSJTX-improved`, an 'improved' version of the original JS8Call, the source
-code for which is now hosted on this repository.
-
-I am not the original author, and have no desire to create a fork, add new features, etc. My motivation
-was to have a native version of JS8Call that would run on my Apple silicon Mac, using a current version
-of the Qt and Hamlib libraries. Along the way, I discovered and corrected a few bugs, and made some minor
-visual improvements to the UI.
-
-Anyway.....that's what this does; that's all this does. It's not intended to be anything but a vehicle
-by which to provide my changes to the original author.
 
 # Notable Changes
 - Use of Fortran has been eliminated; everything that was previously implemented in Fortran has
@@ -147,9 +138,6 @@ particularly platform-specific.
 
 The earliest version of OSX that Qt6 supports is 11.0. It's set up to compile and link to run
 on 11.0 or later, but I've only tested it on 14.6, 14.7, and 15.3.
-
-Testing on Linux and Windows has been ably provided by Joe Counsil, K0OG, who does the bulk of the
-grunt work while I largely just type things and drink coffee.
 
 Allan Bazinet, W6BAZ
 
