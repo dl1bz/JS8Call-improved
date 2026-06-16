@@ -3,8 +3,8 @@
  * @brief implementation of waterfall spectrum display
  */
 
+#include "JS8_Main/qt_helpers.h"
 #include "WF.h"
-#include "qt_helpers.h"
 #include "ui_wf_palette_design_dialog.h"
 
 #include <QAction>
@@ -16,6 +16,7 @@
 #include <QFileDialog>
 #include <QLoggingCategory>
 #include <QMenu>
+#include <QMessageBox>
 #include <QMetaType>
 #include <QObject>
 #include <QPoint>
@@ -27,6 +28,7 @@
 #include <QTextStream>
 
 #include <memory>
+#include <stdexcept>
 
 /******************************************************************************/
 // Private Implementation
@@ -162,7 +164,11 @@ class Designer : public QDialog {
     }
 
     void insert_new_item(int row, QColor const &default_colour) {
-        // use the prior row colour as default if available
+        if (colours_.size() >= points) {
+            QMessageBox::warning(this, tr("Palette Full"),
+                tr("A palette cannot exceed %1 colours.").arg(points));
+            return;
+        }
         auto new_colour = QColorDialog::getColor(
             row > 0 ? colours_[row - 1] : default_colour, this);
         if (new_colour.isValid()) {
@@ -203,19 +209,22 @@ class Designer : public QDialog {
     }
 
     void import_palette() {
-        auto docs =
-            QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+        auto docs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
         auto file_name = QFileDialog::getOpenFileName(
             this, tr("Import Palette"), docs, tr("Palettes (*.pal)"));
         if (!file_name.isEmpty()) {
-            colours_ = load_palette(file_name);
-            load_table();
+            try {
+                colours_ = load_palette(file_name);
+                load_table();
+            } catch (std::runtime_error const &error) {
+                QMessageBox::critical(this, tr("Import Failed"),
+                    QString::fromLocal8Bit(error.what()));
+            }
         }
     }
 
     void export_palette() {
-        auto docs =
-            QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+        auto docs = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
         auto file_name = QFileDialog::getSaveFileName(
             this, tr("Export Palette"), docs, tr("Palettes (*.pal)"));
         if (!file_name.isEmpty()) {
@@ -230,9 +239,8 @@ class Designer : public QDialog {
                            << colour.blue() << Qt::endl;
                 }
             } else {
-                throw_qstring(
-                    QObject::tr(
-                        "Error writing waterfall palette file \"%1\": %2.")
+                QMessageBox::critical(this, tr("Export Failed"),
+                    QObject::tr("Error writing waterfall palette file \"%1\": %2.")
                         .arg(file.fileName())
                         .arg(file.errorString()));
             }

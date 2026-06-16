@@ -129,7 +129,7 @@ cmake_dependent_option(
 find_package(Boost 1.77 REQUIRED)
 find_package(FFTW3      REQUIRED COMPONENTS single threads)
 find_package(Hamlib     REQUIRED)
-find_package(Qt6    6.5 REQUIRED COMPONENTS Multimedia Network SerialPort Widgets)
+find_package(Qt6  6.9.3 REQUIRED COMPONENTS Multimedia Network SerialPort Widgets)
 
 include_directories(${Boost_INCLUDE_DIRS})
 include_directories(${FFTW3_INCLUDE_DIRS})
@@ -289,7 +289,6 @@ target_sources(
   JS8_Main/RDP.cpp
   JS8_Main/StationList.cpp
   JS8_Main/TxLoop.cpp
-  JS8_Main/WF.cpp
   JS8_Main/fileutils.cpp
   JS8_Main/main.cpp
   JS8_Main/Modes.cpp
@@ -348,6 +347,7 @@ target_sources(
   JS8_UI/mainwindow.cpp
   JS8_UI/MessageReplyDialog.cpp
   JS8_UI/MessagePanel.cpp
+  JS8_UI/WF.cpp
   JS8_UI/WideGraph.cpp
   JS8_Widgets/CheckableItemComboBox.cpp
   JS8_Widgets/LazyFillComboBox.cpp
